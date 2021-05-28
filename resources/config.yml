@@ -1,0 +1,9 @@
+/*
+Supporting by Ilaicraft569
+Orginal source by ethaniccc
+NODEBUFF BOT
+*/
+// World used for the bot
+world: "ndfbot"
+//Enable lose-message
+lose-message: true
