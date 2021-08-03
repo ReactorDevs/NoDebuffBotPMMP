@@ -63,8 +63,10 @@ class Main extends PluginBase implements Listener{
                     $sender->sendMessage(TextFormat::RED . "You can only run this in-game!");
                 } else {
                     $nbt = Entity::createBaseNBT($sender->asVector3()->subtract(10, 0, 10));
+                    $level = $this->getServer-getLevelByName('ndfbot');
+                    $name = $sender->getName();
                     $nbt->setTag($sender->namedtag->getTag("Skin"));
-                    $bot = new Bot($this->getServer()->getLevelByName("ndfbot"), $nbt, $sender->getName());
+                    $bot = new Bot($level, $nbt, $name);
                     $bot->setNameTagAlwaysVisible(true);
                     $bot->spawnToAll();
                     $bot->giveItems();
