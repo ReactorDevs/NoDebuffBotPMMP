@@ -28,6 +28,8 @@ class Main extends PluginBase implements Listener{
 
     public function onEnable(){
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
+        $this->getLogger()->info("NoDebuffBot Loaded Successfully!")
+        $this->getLogger()->info("Plugin by: ethaniccc, bug fixes and improvements by: ilai")
     }
 
     public function onDeath(PlayerDeathEvent $event) : void{
