@@ -54,7 +54,6 @@ class Bot extends Human{
      * @param Level $level
      * @param CompoundTag $nbt
      * @param string $target
-     * @param Skin $skin
      */
     public function __construct(Level $level, CompoundTag $nbt, string $target){
         parent::__construct($level, $nbt);
