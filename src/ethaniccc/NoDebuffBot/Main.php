@@ -62,8 +62,11 @@ class Main extends PluginBase implements Listener{
                 if(!$sender instanceof Player){
                     $sender->sendMessage(TextFormat::RED . "You can only run this in-game!");
                 } else {
-                    $nbt = Entity::createBaseNBT($sender->asVector3()->subtract(10, 0, 10));
                     $level = $this->getServer()->getLevelByName('ndfbot');
+                    if($level != $sender->getLevel()){
+                      $sender->sendMessage(TextFormat::RED . "You arent in the ndfbot world");
+                    } else {
+                    $nbt = Entity::createBaseNBT($sender->asVector3()->subtract(10, 0, 10));
                     $name = $sender->getName();
                     $nbt->setTag($sender->namedtag->getTag("Skin"));
                     $bot = new Bot($level, $nbt, $name);
@@ -87,6 +90,7 @@ class Main extends PluginBase implements Listener{
                     $sender->getArmorInventory()->setBoots(Item::get(Item::DIAMOND_BOOTS));
                     $sender->getInventory()->setHeldItemIndex(0);
                     $this->fighting[$sender->getName()] = 0;
+                  }
                 }
                 break;
         }
