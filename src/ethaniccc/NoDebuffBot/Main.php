@@ -68,7 +68,7 @@ class Main extends PluginBase implements Listener{
                       if($this->getServer()->isLevelLoaded($level)){
                       $sender->teleport($level->getSafeSpawn());
                       } else {
-                       $this->getServer()->loadLevel($world);
+                       $this->getServer()->loadLevel($level);
                        $sender->teleport($level->getSafeSpawn());
                       }
                     } else {
