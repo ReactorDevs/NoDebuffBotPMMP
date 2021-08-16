@@ -65,7 +65,12 @@ class Main extends PluginBase implements Listener{
                     $level = $this->getServer()->getLevelByName('ndfbot');
                     if($level != $sender->getLevel()){
                       $sender->sendMessage(TextFormat::RED . "You arent in the ndfbot world, teleporting");
+                      if($this->getServer()->isLevelLoaded($level)){
                       $sender->teleport($level->getSafeSpawn());
+                      } else {
+                       $this->getServer()->loadLevel($world);
+                       $sender->teleport($level->getSafeSpawn());
+                      }
                     } else {
                     $nbt = Entity::createBaseNBT($sender->asVector3()->subtract(10, 0, 10));
                     $name = $sender->getName();
