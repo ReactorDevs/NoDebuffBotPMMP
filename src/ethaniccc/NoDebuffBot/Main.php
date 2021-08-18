@@ -20,6 +20,7 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
+use pocketmine\utils\Config;
 
 class Main extends PluginBase implements Listener{
 
@@ -28,6 +29,8 @@ class Main extends PluginBase implements Listener{
 
     public function onEnable(){
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
+        $this->saveDefaultConfig();
+        $this->reloadConfig();
         $this->getLogger()->info("NoDebuffBot Loaded Successfully!");
         $this->getLogger()->info("Plugin by: ethaniccc, bug fixes and improvements by: ilai");
     }
@@ -62,7 +65,9 @@ class Main extends PluginBase implements Listener{
                 if(!$sender instanceof Player){
                     $sender->sendMessage(TextFormat::RED . "You can only run this in-game!");
                 } else {
-                    $level = $this->getServer()->getLevelByName('ndfbot');
+                    $cworld = $this->getConfig()->get("world");
+                    $level = $this->getServer()->getLevelByName($cworld);
+                    
                     if($level != $sender->getLevel()){
                       $sender->sendMessage(TextFormat::RED . "You arent in the ndfbot world, teleporting");
                       if($this->getServer()->isLevelLoaded($level->getName())){
