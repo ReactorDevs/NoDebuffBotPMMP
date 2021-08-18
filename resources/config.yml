@@ -1,3 +1,4 @@
+---
 /*
 Supporting by Ilaicraft569
 Orginal source by ethaniccc
@@ -7,3 +8,4 @@ NODEBUFF BOT
 world: "ndfbot"
 //Enable lose-message
 lose-message: true
+...
