@@ -1,9 +1,5 @@
 ---
-#
-Supporting by Ilaicraft569
-Orginal source by ethaniccc
-NODEBUFF BOT
-#
+# NoDebuffBot config file
 # World used for the bot
 world: "ndfbot"
 # Enable lose-message
