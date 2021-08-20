@@ -70,7 +70,7 @@ class Main extends PluginBase implements Listener{
                     
                     if($level != $sender->getLevel()){
                       $sender->sendMessage(TextFormat::RED . "You arent in the ndfbot world, teleporting");
-                      if($this->getServer()->isLevelLoaded($level->getName())){
+                      if($this->getServer()->isLevelLoaded($cworld)){
                       $sender->teleport($level->getSafeSpawn());
                       } else {
                        $this->getServer()->loadLevel($level);
