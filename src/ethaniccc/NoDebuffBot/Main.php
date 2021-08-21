@@ -72,12 +72,7 @@ class Main extends PluginBase implements Listener{
                       $sender->sendMessage(TextFormat::RED . "You arent in the ndfbot world, teleporting");
                       if($this->getServer()->isLevelLoaded($cworld)){
                       $sender->teleport($level->getSafeSpawn());
-                      } else {
-                       $this->getServer()->loadLevel($level);
-                       $sender->teleport($level->getSafeSpawn());
-                      }
-                    } else {
-                    $nbt = Entity::createBaseNBT($sender->asVector3()->subtract(10, 0, 10));
+                      $nbt = Entity::createBaseNBT($sender->asVector3()->subtract(10, 0, 10));
                     $name = $sender->getName();
                     $nbt->setTag($sender->namedtag->getTag("Skin"));
                     $bot = new Bot($level, $nbt, $name);
@@ -101,11 +96,10 @@ class Main extends PluginBase implements Listener{
                     $sender->getArmorInventory()->setBoots(Item::get(Item::DIAMOND_BOOTS));
                     $sender->getInventory()->setHeldItemIndex(0);
                     $this->fighting[$sender->getName()] = 0;
-                  }
-                }
-                break;
-        }
-        return true;
-    }
-
-}
+                      } else {
+                       $this->getServer()->loadLevel($level);
+                       $sender->teleport($level->getSafeSpawn());
+$nbt = Entity::createBaseNBT($sender->asVector3()->subtract(10, 0, 10));
+                    $name = $sender->getName();
+                    $nbt->setTag($sender->namedtag->getTag("Skin"));
+                    $bot = new Bot($level, $nbt, $na
