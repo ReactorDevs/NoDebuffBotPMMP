@@ -48,7 +48,7 @@ class Main extends PluginBase implements Listener{
                 }
                 if($e->getDamager() instanceof Player){
                 if($this->getConfig()->get("win-message")){
-                  $this->getServer()->broadcastMessage(TextFormat::Red . "{$event->getPlayer()-getName()} win VS the NoDebuffBot.")
+                  $this->getServer()->broadcastMessage(TextFormat::Red . "{$event->getPlayer()-getName()} win VS the NoDebuffBot.");
                 }
                 }
             }
