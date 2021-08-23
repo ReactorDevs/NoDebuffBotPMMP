@@ -41,7 +41,15 @@ class Main extends PluginBase implements Listener{
             $e = $event->getPlayer()->getLastDamageCause();
             if($e instanceof EntityDamageByEntityEvent){
                 if($e->getDamager() instanceof Bot){
+                  
+                  if($this->getConfig()->get("lost-message")){
                     $this->getServer()->broadcastMessage(TextFormat::RED . "{$event->getPlayer()->getName()} lost to the NoDebuff bot. The bot had {$e->getDamager()->getRemainingPots()} pots remaining.");
+                  }
+                }
+                if($e->getDamager() instanceof Player){
+                if($this->getConfig()->get("win-message")){
+                  $this->getServer()->broadcastMessage(TextFormat::Red . "{$event->getPlayer()-getName()} win VS the NoDebuffBot.")
+                }
                 }
             }
         }
