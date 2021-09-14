@@ -21,6 +21,7 @@ use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 use pocketmine\utils\Config;
+use pocketmine\level\Level;
 
 class Main extends PluginBase implements Listener{
 
@@ -77,43 +78,48 @@ class Main extends PluginBase implements Listener{
                     $level = $this->getServer()->getLevelByName($cworld);
                     
                     if($level != $sender->getLevel()){
-                      $sender->sendMessage(TextFormat::RED . "You arent in the ndfbot world, teleporting");
                       if($this->getServer()->isLevelLoaded($cworld)){
                       $sender->teleport($level->getSafeSpawn());
+                      $this->createBot($level, $sender);
                       } else {
                        $this->getServer()->loadLevel($level);
                        $sender->teleport($level->getSafeSpawn());
+                       $this->createBot($level, $sender);
                       }
                     } else {
-                    $nbt = Entity::createBaseNBT($sender->asVector3()->subtract(10, 0, 10));
-                    $name = $sender->getName();
-                    $nbt->setTag($sender->namedtag->getTag("Skin"));
-                    $bot = new Bot($level, $nbt, $name);
-                    $bot->setNameTagAlwaysVisible(true);
-                    $bot->spawnToAll();
-                    $bot->giveItems();
-                    $bot->setCanSaveWithChunk(false);
-                    for($i = 0; $i <= 35; ++$i){
-                        $sender->getInventory()->setItem($i, Item::get(Item::SPLASH_POTION, 22, 1));
-                    }
-                    $effect = new EffectInstance(Effect::getEffect(Effect::FIRE_RESISTANCE), 100000, 255);
-                    $sender->addEffect($effect);
-                    $bot->addEffect($effect);
-                    $sword = Item::get(Item::DIAMOND_SWORD);
-                    $sword->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::FIRE_ASPECT)));
-                    $sender->getInventory()->setItem(0, $sword);
-                    $sender->getInventory()->setItem(1, Item::get(Item::ENDER_PEARL, 0, 16));
-                    $sender->getArmorInventory()->setHelmet(Item::get(Item::DIAMOND_HELMET));
-                    $sender->getArmorInventory()->setChestplate(Item::get(Item::DIAMOND_CHESTPLATE));
-                    $sender->getArmorInventory()->setLeggings(Item::get(Item::DIAMOND_LEGGINGS));
-                    $sender->getArmorInventory()->setBoots(Item::get(Item::DIAMOND_BOOTS));
-                    $sender->getInventory()->setHeldItemIndex(0);
-                    $this->fighting[$sender->getName()] = 0;
+                    $this->createBot($level, $sender);
                   }
                 }
                 break;
         }
         return true;
+    }
+
+    public function createBot(Level $level, CommandSender $sender){
+        $nbt = Entity::createBaseNBT($sender->asVector3()->subtract(10, 0, 10));
+        $name = $sender->getName();
+        $nbt->setTag($sender->namedtag->getTag("Skin"));
+        $bot = new Bot($level, $nbt, $name);
+        $bot->setNameTagAlwaysVisible(true);
+        $bot->spawnToAll();
+        $bot->giveItems();
+        $bot->setCanSaveWithChunk(false);
+        for($i = 0; $i <= 35; ++$i){
+            $sender->getInventory()->setItem($i, Item::get(Item::SPLASH_POTION, 22, 1));
+        }
+        $effect = new EffectInstance(Effect::getEffect(Effect::FIRE_RESISTANCE), 100000, 255);
+        $sender->addEffect($effect);
+        $bot->addEffect($effect);
+        $sword = Item::get(Item::DIAMOND_SWORD);
+        $sword->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::FIRE_ASPECT)));
+        $sender->getInventory()->setItem(0, $sword);
+        $sender->getInventory()->setItem(1, Item::get(Item::ENDER_PEARL, 0, 16));
+        $sender->getArmorInventory()->setHelmet(Item::get(Item::DIAMOND_HELMET));
+        $sender->getArmorInventory()->setChestplate(Item::get(Item::DIAMOND_CHESTPLATE));
+        $sender->getArmorInventory()->setLeggings(Item::get(Item::DIAMOND_LEGGINGS));
+        $sender->getArmorInventory()->setBoots(Item::get(Item::DIAMOND_BOOTS));
+        $sender->getInventory()->setHeldItemIndex(0);
+        $this->fighting[$sender->getName()] = 0;
     }
 
 }
