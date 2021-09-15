@@ -10,7 +10,7 @@ Create a world called ndfbot and execute /nodebuff.
 ## Credits
 
 This is a project originally written by [ethaniccc](https://github.com/ethaniccc/NoDebuffBot).
-All bug fixes and improvments are made by Star Network Team.
+All bug fixes and improvments are made by SSHStudios.
 
 ## Contribuiting
 
